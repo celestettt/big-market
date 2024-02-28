@@ -4,7 +4,9 @@ import lombok.Data;
 
 import java.util.Date;
 
-/*抽奖策略*/
+/**
+ * @author celeste
+ */ /*抽奖策略*/
 @Data
 public class Strategy {
         //自增ID

@@ -5,9 +5,14 @@ import org.example.infrastructure.persistent.po.Strategy;
 import org.example.infrastructure.persistent.po.StrategyRule;
 
 import java.util.List;
-@Mapper
+/**
+ * @author celeste
+ */
+
 /*策略规则Dao*/
+@Mapper
 public interface IStrategyRuleDao {
     List<StrategyRule> queryStrategyRuleList();
 
+    StrategyRule queryStrategyRule(StrategyRule strategyRuleReq);
 }

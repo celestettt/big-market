@@ -3,6 +3,9 @@ package org.example.types.exception;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * @author celeste
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class AppException extends RuntimeException {
