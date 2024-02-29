@@ -6,17 +6,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author celeste
- */ //@description 策略结果实体
+ * @author Celeste
+ * @date 2024/2/28$
+ */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AwardEntity {
-
-    /** 用户ID */
+public class RuleMatterEntity {
     private String userId;
-    /** 奖品ID */
+
+    private Long strategyId;
+
+    // 抽奖奖品ID；
     private Integer awardId;
+    // 抽奖规则类型
+    private String ruleModel;
 
 }
