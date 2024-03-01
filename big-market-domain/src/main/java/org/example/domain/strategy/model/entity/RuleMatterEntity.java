@@ -17,7 +17,6 @@ public class RuleMatterEntity {
     private String userId;
 
     private Long strategyId;
-
     // 抽奖奖品ID；
     private Integer awardId;
     // 抽奖规则类型

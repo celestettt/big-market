@@ -8,5 +8,6 @@ import org.example.domain.strategy.model.entity.RaffleFactorEntity;
  * @date 2024/2/28$
  */
 public interface IRaffleStrategy {
-    RaffleAwardEntity preformRaffle(RaffleFactorEntity raffleFactorEntity);
+
+    RaffleAwardEntity performRaffle(RaffleFactorEntity raffleFactorEntity);
 }
