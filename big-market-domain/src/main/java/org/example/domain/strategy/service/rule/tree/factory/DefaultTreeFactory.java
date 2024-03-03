@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.domain.strategy.model.entity.StrategyAwardEntity;
+
 import org.example.domain.strategy.model.vo.RuleLogicCheckTypeVO;
 import org.example.domain.strategy.model.vo.RuleTreeVO;
 import org.example.domain.strategy.service.rule.tree.ILogicTreeNode;
@@ -39,13 +39,13 @@ public class DefaultTreeFactory {
     @NoArgsConstructor
     public static class DefaultTreeAction{
         private RuleLogicCheckTypeVO ruleLogicCheckType;
-        private StrategyAwardData strategyAwardData;
+        private StrategyAwardVO strategyAwardData;
     }
    @Data
    @Builder
    @AllArgsConstructor
    @NoArgsConstructor
-    public static class StrategyAwardData{
+    public static class StrategyAwardVO{
         /** 奖品ID */
         private Integer awardId;
         /** 抽奖规则比值 */

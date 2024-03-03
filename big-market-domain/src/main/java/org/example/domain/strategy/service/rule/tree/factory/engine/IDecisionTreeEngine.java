@@ -8,7 +8,7 @@ import org.example.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
  * @description 规则树的组合接口
  */
 public interface IDecisionTreeEngine {
-    DefaultTreeFactory.StrategyAwardData  process(String userId, Long strategyId, Integer awardId);
+    DefaultTreeFactory.StrategyAwardVO  process(String userId, Long strategyId, Integer awardId);
 
 
 }

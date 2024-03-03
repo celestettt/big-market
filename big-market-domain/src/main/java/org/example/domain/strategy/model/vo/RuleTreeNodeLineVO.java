@@ -14,7 +14,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RuleTreeNodeLineVO {
-   private Integer treeId;
+   private String treeId;
    private String ruleNodeFrom;
 
    private String ruleNodeTo;
