@@ -13,7 +13,7 @@ import org.example.domain.strategy.model.entity.RaffleFactorEntity;
 import org.example.domain.strategy.service.IRaffleStrategy;
 import org.example.domain.strategy.service.armory.IStrategyArmory;
 import org.example.domain.strategy.service.rule.chain.impl.RuleWeightListLogicChain;
-import org.example.domain.strategy.service.rule.filter.impl.RuleLockLogicFilter;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,8 +39,7 @@ public class RaffleStrategyTest {
     private IRaffleStrategy raffleStrategy;
     @Resource
     private RuleWeightListLogicChain ruleWeightListLogicChain;
-    @Resource
-    private RuleLockLogicFilter ruleLockLogicFilter;
+
 
 //
 //    @Before
