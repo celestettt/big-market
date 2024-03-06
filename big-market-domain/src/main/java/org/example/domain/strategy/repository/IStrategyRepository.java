@@ -5,6 +5,8 @@ import org.example.domain.strategy.model.entity.StrategyEntity;
 import org.example.domain.strategy.model.entity.StrategyRuleEntity;
 import org.example.domain.strategy.model.vo.RuleTreeVO;
 import org.example.domain.strategy.model.vo.StrategyAwardRuleModelVO;
+import org.example.domain.strategy.model.vo.StrategyAwardStockKeyVO;
+import org.example.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 
 import java.math.BigDecimal;
 import java.security.SecureRandom;
@@ -39,4 +41,14 @@ public interface IStrategyRepository {
 
 
     RuleTreeVO queryRuleTreeVOByTreeId(String treeLock);
+
+    void cacheStrategyAwardCount(String cacheKey, Integer awardCount);
+
+    Boolean subtractionAwardStock(String cacheKey);
+
+    void awardStockConsumeSendQueue(StrategyAwardStockKeyVO strategyAwardStockKeyVO);
+
+    StrategyAwardStockKeyVO takeQueueValue() throws InterruptedException;
+
+    void updateStrategyAwardStock(Long strategyId, Integer awardId);
 }

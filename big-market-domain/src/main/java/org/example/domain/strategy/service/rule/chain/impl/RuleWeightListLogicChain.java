@@ -36,38 +36,31 @@ public class RuleWeightListLogicChain extends AbstractLogicChain {
      */
     @Override
     public DefaultChainFactory.StrategyAwardVO logic(String userId, Long strategyId) {
-        log.info("规则过滤-权重范围 userId:{} strategyId:{} ruleModel:{}", userId,strategyId,ruleModel());
+        log.info("抽奖责任链-黑名单开始 userId: {} strategyId: {} ruleModel: {}", userId, strategyId, ruleModel());
 
+        // 查询规则值配置
+        String ruleValue = repository.queryStrategyRuleValue(strategyId, ruleModel());
+        String[] splitRuleValue = ruleValue.split(Constants.COLON);
+        Integer awardId = Integer.parseInt(splitRuleValue[0]);
 
-        String ruleValue = repository.queryStrategyRuleValue(strategyId,ruleModel());
-
-        // 1. 根据用户ID查询用户抽奖消耗的积分值，本章节我们先写死为固定的值。后续需要从数据库中查询。
-        Map<Long, String> analyticalValueGroup = getAnalyticalValue(ruleValue);
-        if (null == analyticalValueGroup || analyticalValueGroup.isEmpty()) return  null;
-
-        // 2. 转换Keys值，并默认排序
-        List<Long> analyticalSortedKeys = new ArrayList<>(analyticalValueGroup.keySet());
-        Collections.sort(analyticalSortedKeys);
-//        todo
-        Long nextValue = analyticalSortedKeys.stream()
-                .filter(key -> userScore >= key)
-                .findFirst()
-                .orElse(null);
-        if(null!=nextValue){
-            Integer awardId = strategyDispatch.getRandomAwardId(strategyId, analyticalValueGroup.get(nextValue));
-            log.info("抽奖责任链-权重接管 userId: {} strategyId: {} ruleModel: {} awardId: {}", userId, strategyId, ruleModel(), awardId);
-            return DefaultChainFactory.StrategyAwardVO.builder()
-                            .awardId(awardId)
-                             .logicModel(ruleModel())
-                              .build();
-
+        // 黑名单抽奖判断
+        String[] userBlackIds = splitRuleValue[1].split(Constants.SPLIT);
+        for (String userBlackId : userBlackIds) {
+            if (userId.equals(userBlackId)) {
+                log.info("抽奖责任链-黑名单接管 userId: {} strategyId: {} ruleModel: {} awardId: {}", userId, strategyId, ruleModel(), awardId);
+                return DefaultChainFactory.StrategyAwardVO.builder()
+                        .awardId(awardId)
+                        .logicModel(ruleModel())
+                        .build();
+            }
         }
-        log.info("抽奖责任链-权重放行 userId: {} strategyId: {} ruleModel: {}", userId, strategyId, ruleModel());
 
-
-        return next().logic(userId,strategyId);
-
+        // 过滤其他责任链
+        log.info("抽奖责任链-黑名单放行 userId: {} strategyId: {} ruleModel: {}", userId, strategyId, ruleModel());
+        return next().logic(userId, strategyId);
     }
+
+
 
     private Map<Long, String> getAnalyticalValue(String ruleValue) {
         String[] ruleValueGroups = ruleValue.split(Constants.SPACE);

@@ -18,4 +18,6 @@ public interface IStrategyDispatch {
 
     Integer getRandomAwardId(String key);
 
+    Boolean subtractionAwardStock(Long strategyId, Integer awardId);
+
 }
